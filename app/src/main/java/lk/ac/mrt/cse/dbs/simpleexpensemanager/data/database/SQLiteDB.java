@@ -10,10 +10,12 @@ public class SQLiteDB extends SQLiteOpenHelper {
     private static SQLiteDB sqLiteDB = null;
 
     public static void createInstance (Context context) {
+
         sqLiteDB = new SQLiteDB(context);
     }
 
     public static SQLiteDB getInstance() {
+
         return sqLiteDB;
     }
 
