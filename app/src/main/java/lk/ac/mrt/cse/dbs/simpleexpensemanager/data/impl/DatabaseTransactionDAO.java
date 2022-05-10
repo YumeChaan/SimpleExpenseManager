@@ -68,11 +68,11 @@ public class DatabaseTransactionDAO implements TransactionDAO {
     private List<Transaction> getLogsList(Cursor cursor) {
 
         Map<String,Integer> columns = new HashMap<>();
-        columns.put("id",cursor.getColumnIndex("id"));
-        columns.put("date",cursor.getColumnIndex("date"));
-        columns.put("accountNo",cursor.getColumnIndex("accountNo"));
-        columns.put("expenseType",cursor.getColumnIndex("expenseType"));
-        columns.put("amount",cursor.getColumnIndex("amount"));
+        columns.put("id",cursor.getColumnIndexOrThrow("id"));
+        columns.put("date",cursor.getColumnIndexOrThrow("date"));
+        columns.put("accountNo",cursor.getColumnIndexOrThrow("accountNo"));
+        columns.put("expenseType",cursor.getColumnIndexOrThrow("expenseType"));
+        columns.put("amount",cursor.getColumnIndexOrThrow("amount"));
 
         List<Transaction> logsList = new LinkedList<>();
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
