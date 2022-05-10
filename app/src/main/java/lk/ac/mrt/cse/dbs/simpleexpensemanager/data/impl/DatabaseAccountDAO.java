@@ -28,7 +28,7 @@ public class DatabaseAccountDAO implements AccountDAO {
         List <String> accountNumbers = new LinkedList<>();
 
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()){
-            String accountNo = cursor.getString(cursor.getColumnIndex("accountNo"));
+            String accountNo = cursor.getString(cursor.getColumnIndexOrThrow("accountNo"));
             accountNumbers.add(accountNo);
         }
         return accountNumbers;
@@ -42,10 +42,10 @@ public class DatabaseAccountDAO implements AccountDAO {
 
         List <Account> accountList = new LinkedList<>();
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()){
-            String accountNo = cursor.getString(cursor.getColumnIndex("accountNo"));
-            String bankName = cursor.getString(cursor.getColumnIndex("bankName"));
-            String accountHolderName = cursor.getString(cursor.getColumnIndex("accountHolderName"));
-            double balance = cursor.getDouble(cursor.getColumnIndex("balance"));
+            String accountNo = cursor.getString(cursor.getColumnIndexOrThrow("accountNo"));
+            String bankName = cursor.getString(cursor.getColumnIndexOrThrow("bankName"));
+            String accountHolderName = cursor.getString(cursor.getColumnIndexOrThrow("accountHolderName"));
+            double balance = cursor.getDouble(cursor.getColumnIndexOrThrow("balance"));
 
             Account account = new Account(accountNo, bankName, accountHolderName, balance);
 
@@ -62,10 +62,10 @@ public class DatabaseAccountDAO implements AccountDAO {
 
         if(cursor.moveToFirst()) {
             return new Account(
-                    cursor.getString(cursor.getColumnIndex("accountNo")),
-                    cursor.getString(cursor.getColumnIndex("bankName")),
-                    cursor.getString(cursor.getColumnIndex("accountHolderName")),
-                    cursor.getDouble(cursor.getColumnIndex("balance"))
+                    cursor.getString(cursor.getColumnIndexOrThrow("accountNo")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("bankName")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("accountHolderName")),
+                    cursor.getDouble(cursor.getColumnIndexOrThrow("balance"))
             );
         }else {
             throw new InvalidAccountException(accountNo + "not found.");
