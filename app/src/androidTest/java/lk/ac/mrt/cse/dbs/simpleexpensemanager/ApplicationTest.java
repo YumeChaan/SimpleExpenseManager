@@ -56,14 +56,18 @@ public class ApplicationTest  {
 //    }
 
     @Test
-    public void testTransaction() throws InvalidAccountException {
+    public void testTransaction()  {
         Context context = ApplicationProvider.getApplicationContext();
         SQLiteDB.createInstance(context);
         expenseManager = new PersistentExpenseManager();
 
 
         int n = expenseManager.getTransactionLogs().size();
-        expenseManager.updateAccountBalance("1965", 11,05,2022, ExpenseType.INCOME, "2500");
+        try {
+            expenseManager.updateAccountBalance("1965", 11,5,2022, ExpenseType.INCOME, "2500");
+        } catch (InvalidAccountException e) {
+            fail();
+        }
         int m = expenseManager.getTransactionLogs().size();
 
         assertTrue(n+1 == m);
