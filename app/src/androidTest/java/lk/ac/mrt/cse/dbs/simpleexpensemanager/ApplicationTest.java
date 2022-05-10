@@ -41,19 +41,19 @@ import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.model.Transaction;
 public class ApplicationTest  {
     private static ExpenseManager expenseManager;
 
-//    @BeforeClass
-//    public static void addAccountTest(){
-//
-//        Context context = ApplicationProvider.getApplicationContext();
-//        SQLiteDB.createInstance(context);
-//        expenseManager = new PersistentExpenseManager();
-//        expenseManager.addAccount("1965", "Commercial", "Amaya", 1000);
-//    }
-//
-//    @Test
-//    public void testAddedAccount(){
-//        assertTrue(expenseManager.getAccountNumbersList().contains("1965"));
-//    }
+    @BeforeClass
+    public static void addAccountTest(){
+
+        Context context = ApplicationProvider.getApplicationContext();
+        SQLiteDB.createInstance(context);
+        expenseManager = new PersistentExpenseManager();
+        expenseManager.addAccount("1965", "Commercial", "Amaya", 1000);
+    }
+
+    @Test
+    public void testAddedAccount(){
+        assertTrue(expenseManager.getAccountNumbersList().contains("1965"));
+    }
 
     @Test
     public void testTransaction()  {
