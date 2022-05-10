@@ -26,10 +26,14 @@ import androidx.test.core.app.ApplicationProvider;
 import org.junit.Test;
 import org.junit.BeforeClass;
 
+import java.util.List;
+
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.control.ExpenseManager;
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.control.PersistentExpenseManager;
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.database.SQLiteDB;
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.exception.InvalidAccountException;
+import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.model.ExpenseType;
+import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.model.Transaction;
 
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
@@ -37,23 +41,32 @@ import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.exception.InvalidAccountExcep
 public class ApplicationTest  {
     private static ExpenseManager expenseManager;
 
-    @BeforeClass
-    public static void addAccountTest(){
+//    @BeforeClass
+//    public static void addAccountTest(){
+//
+//        Context context = ApplicationProvider.getApplicationContext();
+//        SQLiteDB.createInstance(context);
+//        expenseManager = new PersistentExpenseManager();
+//        expenseManager.addAccount("1965", "Commercial", "Amaya", 1000);
+//    }
+//
+//    @Test
+//    public void testAddedAccount(){
+//        assertTrue(expenseManager.getAccountNumbersList().contains("1965"));
+//    }
 
+    @Test
+    public void testTransaction() throws InvalidAccountException {
         Context context = ApplicationProvider.getApplicationContext();
         SQLiteDB.createInstance(context);
         expenseManager = new PersistentExpenseManager();
-        expenseManager.addAccount("1965", "Commercial", "Amaya", 1000);
-    }
 
-    @Test
-    public void testAddedAccount(){
-        assertTrue(expenseManager.getAccountNumbersList().contains("1965"));
-//        try{
-//            assertTrue(expenseManager.getAccountsDAO().getAccount("1965").getAccountNo() == "1965");
-//        }catch (InvalidAccountException e){
-//            fail();
-//        }
+
+        int n = expenseManager.getTransactionLogs().size();
+        expenseManager.updateAccountBalance("1965", 11,05,2022, ExpenseType.INCOME, "2500");
+        int m = expenseManager.getTransactionLogs().size();
+
+        assertTrue(n+1 == m);
 
     }
 }
